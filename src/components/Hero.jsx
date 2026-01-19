@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
 import { X, Globe, Zap, ExternalLink } from 'lucide-react';
+import Pic from '../assets/picture.jpg';
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
@@ -46,7 +47,7 @@ const Hero = () => {
                         </span>
                     </div>
 
-                    <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tighter leading-[0.9] mb-8">
+                    <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-normal leading-[0.9] mb-8">
                         Global <br /> Projections
                     </h1>
 
@@ -143,7 +144,7 @@ const Hero = () => {
                     ))}
                 </ComposableMap>
             </div>
-
+            
             {/* 3. 中间弹出详情框 */}
             <AnimatePresence>
                 {selectedRegion && (
@@ -162,39 +163,49 @@ const Hero = () => {
                             exit={{ scale: 0.5, opacity: 0 }}
                             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
                             style={{ backgroundColor: themeColor }}
-                            className="relative w-full max-w-[450px] rounded-[3rem] p-10 md:p-14 shadow-2xl flex flex-col border border-white/50"
+                            className="relative w-full max-w-[420px] rounded-[2.5rem] p-10 shadow-2xl flex flex-col border border-white/50 overflow-hidden"
                         >
+                            {/* 关闭按钮 - 提高层级防止被图片遮挡 */}
                             <button
                                 onClick={() => setSelectedRegion(null)}
-                                className="absolute top-8 right-8 p-2 hover:bg-white/40 rounded-full transition-colors"
+                                className="absolute top-6 right-6 z-10 p-2 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full transition-colors"
                             >
-                                <X size={24} />
+                                <X size={20} />
                             </button>
 
-                            <div className="mb-8">
-                                <h2 className="text-4xl font-black text-slate-900 mb-6 tracking-tighter uppercase italic">
+                            <div className="flex flex-col">
+                                <h2 className="text-2xl font-black text-slate-900 mb-6 tracking-tighter uppercase italic text-left">
                                     {selectedRegion.name}
                                 </h2>
-                                <p className="text-sm text-slate-700 leading-relaxed font-semibold text-left">
+
+                                {/* 图片 - 宽度延伸至占满 div */}
+                                <div className="mx-[-2.5rem] mb-6 border-y border-white/30 overflow-hidden">
+                                    <img src={Pic} alt={selectedRegion.name} className="w-full h-auto block object-cover" />
+                                </div>
+
+
+                                <p className="text-[12px] text-slate-700 leading-relaxed font-semibold text-left mb-6 px-2">
                                     {selectedRegion.desc}
                                 </p>
                             </div>
 
-                            <div className="space-y-6">
-                                <div className="bg-white/40 p-5 rounded-2xl backdrop-blur-sm">
-                                    <div className="text-[12px] font-bold text-slate-600 uppercase tracking-widest mb-1 text-center">
+                            <div className="space-y-4">
+                                {/* Target 按钮 - 变矮 */}
+                                <div className="bg-white/40 py-2 px-4 rounded-xl backdrop-blur-sm">
+                                    <div className="text-[10px] font-bold text-slate-600 uppercase tracking-widest text-center">
                                         Target: {selectedRegion.location}
                                     </div>
                                 </div>
 
+                                {/* View Details 按钮 - 变矮 */}
                                 <a
                                     href={selectedRegion.detailsUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center justify-center gap-2 w-full py-4 bg-slate-900 text-white rounded-full font-bold uppercase tracking-widest text-sm hover:bg-slate-800 transition-all shadow-lg group"
+                                    className="flex items-center justify-center gap-2 w-full py-2.5 bg-slate-900 text-white rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-slate-800 transition-all shadow-lg group"
                                 >
                                     View Details
-                                    <ExternalLink size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                    <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                                 </a>
                             </div>
                         </motion.div>
