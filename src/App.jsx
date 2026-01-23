@@ -6,6 +6,7 @@ import NewsPage from './components/NewsPage';
 import DonatePage from './components/Donate.jsx';
 import JoinPage from './components/JoinPage.jsx';
 import Mission from './components/Mission.jsx';
+import Purpose from './components/Purpose.jsx';
 
 const App = () => {
     return (
@@ -16,8 +17,13 @@ const App = () => {
 
                     <Route path="/" element={
                         <>
-                            <Hero />
+                            <section id="actions">
+                                <Hero />
+                            </section>
                             <Mission />
+                            <section id="purpose">
+                                <Purpose />
+                            </section>
 
                         </>
                     } />

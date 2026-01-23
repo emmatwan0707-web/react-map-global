@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
     const navigate = useNavigate();
+    const activeStyle = "text-slate-900 border-b-2 border-slate-900 pb-1";
     return (
 
         <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
@@ -33,17 +34,17 @@ const Header = () => {
                 <ul className="hidden md:flex gap-10 text-[11px] uppercase tracking-[0.2em] text-slate-500 font-bold items-center">
 
                     <li>
-                        <ScrollLink to="about" smooth={true} duration={500} offset={-80} className="cursor-pointer hover:text-slate-900 transition-colors">
+                        <ScrollLink to="actions" spy={true} activeClass={activeStyle} smooth={true} duration={500} offset={-80} className="cursor-pointer hover:text-slate-900 transition-colors">
                             Actions
                         </ScrollLink>
                     </li>
                     <li>
-                        <ScrollLink to="hero" smooth={true} duration={500} offset={-100} className="cursor-pointer hover:text-slate-900 transition-colors">
+                        <ScrollLink to="mission" spy={true} activeClass={activeStyle} smooth={true} duration={500} offset={-100} className="cursor-pointer hover:text-slate-900 transition-colors">
                             Mission
                         </ScrollLink>
                     </li>
                     <li>
-                        <ScrollLink to="projects" smooth={true} duration={500} offset={-60} className="cursor-pointer hover:text-slate-900 transition-colors">
+                        <ScrollLink to="purpose" spy={true} activeClass={activeStyle} smooth={true} duration={500} offset={-60} className="cursor-pointer hover:text-slate-900 transition-colors">
                             Purpose
                         </ScrollLink>
                     </li>

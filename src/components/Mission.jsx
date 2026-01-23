@@ -46,10 +46,10 @@ const Mission = () => {
 
                 {/* 底部：大面积冲击力的 Stats */}
                 <div className="mt-20 grid grid-cols-1 md:grid-cols-4 gap-12">
-                    <StatBox value="12" label="Cities Reached" />
-                    <StatBox value="45" label="Projections" />
-                    <StatBox value="150" label="Kits Sent" />
-                    <StatBox value="300" label="Activists" />
+                    <StatBox value="2" label="Cities Reached" />
+                    <StatBox value="4" label="Projections" />
+                    <StatBox value="15" label="Kits Sent" />
+                    <StatBox value="28" label="Activists" />
                 </div>
             </div>
         </section>
