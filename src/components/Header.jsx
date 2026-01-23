@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-scroll';
+import { Link as ScrollLink } from 'react-scroll';
 import flashlight from '../assets/flashlight.png';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -12,6 +13,10 @@ const Header = () => {
 
                 {/* Logo 区域 */}
                 <div className="flex items-center gap-3">
+                    <Link
+                        to="/"
+                        className="flex items-center gap-3 group cursor-pointer"
+                    >
                     <img
                         src={flashlight}
                         alt="flashlight logo"
@@ -19,33 +24,34 @@ const Header = () => {
                     />
                     {/* 可选：加上你的项目名称 */}
                     <span className="font-black text-slate-900 uppercase tracking-tighter text-lg italic">
-                        The Action
+                        China Action
                     </span>
+                      </Link>
                 </div>
 
                 {/* 中间导航链接 */}
                 <ul className="hidden md:flex gap-10 text-[11px] uppercase tracking-[0.2em] text-slate-500 font-bold items-center">
                     <li>
-                        <Link to="hero" smooth={true} duration={500} offset={-100} className="cursor-pointer hover:text-slate-900 transition-colors">
+                        <ScrollLink to="hero" smooth={true} duration={500} offset={-100} className="cursor-pointer hover:text-slate-900 transition-colors">
                             Mission
-                        </Link>
+                        </ScrollLink>
                     </li>
                     <li>
-                        <Link to="about" smooth={true} duration={500} offset={-80} className="cursor-pointer hover:text-slate-900 transition-colors">
+                        <ScrollLink to="about" smooth={true} duration={500} offset={-80} className="cursor-pointer hover:text-slate-900 transition-colors">
                             Initiatives
-                        </Link>
+                        </ScrollLink>
                     </li>
                     <li>
-                        <Link to="projects" smooth={true} duration={500} offset={-60} className="cursor-pointer hover:text-slate-900 transition-colors">
+                        <ScrollLink to="projects" smooth={true} duration={500} offset={-60} className="cursor-pointer hover:text-slate-900 transition-colors">
                             Purpose
-                        </Link>
+                        </ScrollLink>
                     </li>
                 </ul>
 
                 {/* 右侧操作区域 */}
                 <div className="flex items-center gap-8">
                     {/* Join Us: 作为次级链接 */}
-                    <p className="hidden sm:block text-slate-400 hover:text-slate-900 cursor-pointer font-black transition-all duration-300 uppercase tracking-widest text-[10px]">
+                    <p onClick={() => navigate('/join')} className="hidden sm:block text-slate-400 hover:text-slate-900 cursor-pointer font-black transition-all duration-300 uppercase tracking-widest text-[10px]">
                         Join Us
                     </p>
 

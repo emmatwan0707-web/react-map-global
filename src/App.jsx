@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import NewsPage from './components/NewsPage';
 import DonatePage from './components/Donate.jsx';
+import JoinPage from './components/JoinPage.jsx';
 
 const App = () => {
     return (
@@ -11,7 +12,9 @@ const App = () => {
             <div className="min-h-screen bg-white">
                 <Header />
                 <Routes>
+
                     <Route path="/" element={<Hero />} />
+                    <Route path="/join" element={<JoinPage />} />
 
                     <Route path="/news" element={<NewsPage />} />
                     <Route path="/donate" element={<DonatePage />} />

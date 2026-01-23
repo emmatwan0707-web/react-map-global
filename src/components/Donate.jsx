@@ -11,9 +11,9 @@ const DonatePage = () => {
     const amounts = [10, 25, 50, 100, 250];
 
     return (
-        <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans pb-20">
+        <div className="min-h-screen bg-[#F8FAFC] pt-16 text-slate-900 font-sans pb-20">
             {/* 顶部导航 */}
-            <nav className="p-8">
+            <nav className="px-8 pt-8 pb-0">
                 <button
                     onClick={() => navigate(-1)}
                     className="flex items-center gap-2 text-slate-400 hover:text-slate-900 transition-colors uppercase tracking-widest text-[10px] font-black"
@@ -22,8 +22,8 @@ const DonatePage = () => {
                 </button>
             </nav>
 
-            <main className="max-w-4xl mx-auto px-6">
-                <div className="grid md:grid-cols-2 gap-16 mt-10">
+            <main className="max-w-4xl mx-auto px-6 mt-0">
+                <div className="grid md:grid-cols-2 gap-16 mt-4">
 
                     {/* 左侧：感性内容区 */}
                     <motion.div
@@ -116,10 +116,10 @@ const DonatePage = () => {
                         <div className="space-y-4 mb-8">
                             <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-2">Select Payment Method</h4>
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="border border-slate-100 p-4 rounded-2xl flex items-center justify-center grayscale hover:grayscale-0 cursor-pointer transition-all">
-                                    <span className="font-bold text-slate-300">Stripe</span>
+                                <div className="border border-slate-100 p-4 rounded-3xl flex items-center justify-center grayscale hover:grayscale-0 cursor-pointer transition-all">
+                                    <span className="font-bold text-slate-300">Apple Pay</span>
                                 </div>
-                                <div className="border border-slate-100 p-4 rounded-2xl flex items-center justify-center grayscale hover:grayscale-0 cursor-pointer transition-all">
+                                <div className="border border-slate-100 p-4 rounded-3xl flex items-center justify-center grayscale hover:grayscale-0 cursor-pointer transition-all">
                                     <span className="font-bold text-slate-300">PayPal</span>
                                 </div>
                             </div>
