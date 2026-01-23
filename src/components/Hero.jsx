@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
-import { X, Globe, Zap, ExternalLink } from 'lucide-react';
-import Pic from '../assets/picture.jpg';
+import { X, Zap, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Pic from '../assets/picture.jpg';
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
@@ -12,18 +12,16 @@ const regions = [
         id: 'new-york',
         name: 'New York',
         coordinates: [-74.006, 40.7128],
-        phase: 'Phase 1 & 2',
         location: 'Chinese Consulate',
-        detailsUrl: 'https://example.com/ny-details',
-        desc: 'On International Human Rights Day 2025, We conducted a powerful visual intervention, projecting tributes to Liu Xiaobo and prisoners of conscience. We transformed the space into a global call for justice, demanding the immediate release of all political prisoners in China.' },
+        desc: 'On International Human Rights Day 2025, We conducted a powerful visual intervention, projecting tributes to Liu Xiaobo and prisoners of conscience.'
+    },
     {
         id: 'berlin',
         name: 'Berlin',
         coordinates: [13.405, 52.52],
-        phase: 'Phase 3',
         location: 'Chinese Embassy',
-        detailsUrl: 'https://example.com/berlin-details',
-        desc: "On New Year's Day 2026, We launched a strategic projection in Berlin to mark the start of a new year of resistance. Shown Liu Xiaobo and prisoners of conscience, we amplified the global demand for justice and the unconditional release of all political prisoners in China."}
+        desc: "On New Year's Day 2026, We launched a strategic projection in Berlin to mark the start of a new year of resistance."
+    }
 ];
 
 const Hero = () => {
@@ -32,8 +30,7 @@ const Hero = () => {
 
     return (
         <section id="hero" className="relative w-full h-screen bg-white overflow-hidden flex flex-col">
-
-            {/* 1. 文字区域 - 保持 z-20 但通过 pointer-events 允许点击穿透 */}
+            {/* 文字区域 */}
             <div className="relative z-20 pt-32 pl-10 md:pl-20 w-full md:w-5/12 pointer-events-none">
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
@@ -63,14 +60,10 @@ const Hero = () => {
                 </motion.div>
             </div>
 
-            {/* 2. 地图区域 - 保持 z-10 但确保 Marker 响应点击 */}
+            {/* 地图区域 */}
             <div className="absolute -bottom-[3%] -right-20 w-[85%] h-[85%] z-10 opacity-95 pointer-events-none">
                 <ComposableMap
-                    projectionConfig={{
-                        rotate: [-10, 0, 0],
-                        center: [15, -10],
-                        scale: 210
-                    }}
+                    projectionConfig={{ rotate: [-10, 0, 0], center: [15, -10], scale: 210 }}
                     style={{ width: "100%", height: "100%" }}
                 >
                     <Geographies geography={geoUrl}>
@@ -82,11 +75,7 @@ const Hero = () => {
                                     fill="#DDE7F0"
                                     stroke="#BCCCDD"
                                     strokeWidth={0.8}
-                                    style={{
-                                        default: { outline: "none" },
-                                        hover: { fill: "#D2DEEB", outline: "none" }
-                                    }}
-                                    className="pointer-events-none"
+                                    style={{ default: { outline: "none" } }}
                                 />
                             ))
                         }
@@ -101,43 +90,10 @@ const Hero = () => {
                                 }}
                                 className="cursor-pointer group pointer-events-auto"
                             >
-                                {/* 1. 外层超大扩散圈 (慢速) */}
                                 <circle r={25} fill={themeColor} className="animate-ping opacity-20 [animation-duration:3s]" />
-
-                                {/* 2. 中层快速涟漪 (增强视觉冲击) */}
                                 <circle r={15} fill={themeColor} className="animate-ping opacity-40 [animation-duration:1.5s]" />
-
-                                {/* 3. 核心发光底色 (呼吸感) */}
-                                <motion.circle
-                                    r={10}
-                                    fill={themeColor}
-                                    animate={{
-                                        opacity: [0.4, 0.8, 0.4],
-                                        scale: [1, 1.3, 1]
-                                    }}
-                                    transition={{
-                                        duration: 2,
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
-                                    }}
-                                />
-
-                                {/* 4. 实体中心点 - 增加外发光阴影 */}
-                                <circle
-                                    r={6}
-                                    fill="#2D3748"
-                                    className="group-hover:fill-blue-700 transition-colors shadow-[0_0_15px_rgba(210,222,235,0.8)]"
-                                />
-
-                                {/* 5. 极小白色核心 (模拟灯泡点，让发光更真实) */}
-                                <circle r={1.5} fill="white" className="opacity-80" />
-
-                                {/* 地名标签 */}
-                                <text
-                                    textAnchor="middle"
-                                    y={-28}
-                                    className="text-[10px] font-black fill-slate-800 opacity-0 group-hover:opacity-100 transition-all duration-300 uppercase tracking-widest italic"
-                                >
+                                <circle r={6} fill="#2D3748" className="group-hover:fill-blue-700 transition-colors shadow-lg" />
+                                <text textAnchor="middle" y={-28} className="text-[10px] font-black fill-slate-800 opacity-0 group-hover:opacity-100 transition-all duration-300 uppercase tracking-widest italic">
                                     {region.name}
                                 </text>
                             </g>
@@ -145,8 +101,8 @@ const Hero = () => {
                     ))}
                 </ComposableMap>
             </div>
-            
-            {/* 3. 中间弹出详情框 */}
+
+            {/* 弹出详情框 */}
             <AnimatePresence>
                 {selectedRegion && (
                     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -162,46 +118,31 @@ const Hero = () => {
                             initial={{ scale: 0.5, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.5, opacity: 0 }}
-                            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
                             style={{ backgroundColor: themeColor }}
-                            className="relative w-full max-w-[420px] max-h-[97vh] rounded-[2.5rem] p-10 shadow-2xl flex flex-col border border-white/50 overflow-hidden"
+                            className="relative w-full max-w-[420px] rounded-[2.5rem] p-10 shadow-2xl flex flex-col border border-white/50"
                         >
-                            {/* 关闭按钮 - 提高层级防止被图片遮挡 */}
-                            <button
-                                onClick={() => setSelectedRegion(null)}
-                                className="absolute top-6 right-6 z-10 p-2 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full transition-colors"
-                            >
+                            <button onClick={() => setSelectedRegion(null)} className="absolute top-6 right-6 z-10 p-2 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full">
                                 <X size={20} />
                             </button>
 
-                            <div className="flex flex-col">
-                                <h2 className="text-2xl font-black text-slate-900 mb-6 tracking-tighter uppercase italic text-left">
-                                    {selectedRegion.name}
-                                </h2>
+                            <h2 className="text-2xl font-black text-slate-900 mb-6 uppercase italic">{selectedRegion.name}</h2>
 
-                                {/* 图片 - 宽度延伸至占满 div */}
-                                <div className="mx-[-2.5rem] mb-6 border-y border-white/30 overflow-hidden">
-                                    <img src={Pic} alt={selectedRegion.name} className="w-full h-auto block object-cover" />
-                                </div>
-
-
-                                <p className="text-[12px] text-slate-700 leading-relaxed font-semibold text-left mb-6 px-2">
-                                    {selectedRegion.desc}
-                                </p>
+                            <div className="mx-[-2.5rem] mb-6 overflow-hidden border-y border-white/30">
+                                <img src={Pic} alt={selectedRegion.name} className="w-full h-auto" />
                             </div>
 
+                            <p className="text-[12px] text-slate-700 leading-relaxed font-semibold mb-6 px-2">{selectedRegion.desc}</p>
+
                             <div className="space-y-4">
-                                {/* Target 按钮 - 变矮 */}
-                                <div className="bg-white/40 py-2 px-4 rounded-xl backdrop-blur-sm">
-                                    <div className="text-[10px] font-bold text-slate-600 uppercase tracking-widest text-center">
-                                        Target: {selectedRegion.location}
-                                    </div>
+                                <div className="bg-white/40 py-2 px-4 rounded-xl text-[10px] font-bold text-slate-600 uppercase tracking-widest text-center">
+                                    Target: {selectedRegion.location}
                                 </div>
 
-
+                                {/* 关键修改：跳转时带上 regionId */}
                                 <Link
                                     to="/news"
-                                    className="flex items-center justify-center gap-2 w-full py-2.5 bg-slate-900 text-white rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-slate-800 transition-all shadow-lg group"
+                                    state={{ regionId: selectedRegion.id }}
+                                    className="flex items-center justify-center gap-2 w-full py-2.5 bg-slate-900 text-white rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-slate-800 transition-all group"
                                 >
                                     View Details
                                     <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
