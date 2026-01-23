@@ -1,12 +1,30 @@
 import React from 'react';
-import { Link as ScrollLink } from 'react-scroll';
+import { Link as ScrollLink, scroller } from 'react-scroll';
 import flashlight from '../assets/flashlight.png';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const activeStyle = "text-slate-900 border-b-2 border-slate-900 pb-1";
+
+    const handleNavClick = (targetId) => {
+        if (location.pathname === '/') {
+            return;
+        } else {
+            navigate('/');
+            setTimeout(() => {
+                scroller.scrollTo(targetId, {
+                    duration: 500,
+                    smooth: true,
+                    offset: -80,
+                });
+            }, 100);
+        }
+    };
+
     return (
 
         <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
@@ -34,17 +52,17 @@ const Header = () => {
                 <ul className="hidden md:flex gap-10 text-[11px] uppercase tracking-[0.2em] text-slate-500 font-bold items-center">
 
                     <li>
-                        <ScrollLink to="actions" spy={true} activeClass={activeStyle} smooth={true} duration={500} offset={-80} className="cursor-pointer hover:text-slate-900 transition-colors">
+                        <ScrollLink to="actions" onClick={() => handleNavClick('actions')} spy={true} activeClass={activeStyle} smooth={true} duration={500} offset={-80} className="cursor-pointer hover:text-slate-900 transition-colors">
                             Actions
                         </ScrollLink>
                     </li>
                     <li>
-                        <ScrollLink to="mission" spy={true} activeClass={activeStyle} smooth={true} duration={500} offset={-100} className="cursor-pointer hover:text-slate-900 transition-colors">
+                        <ScrollLink to="mission" onClick={() => handleNavClick('actions')} spy={true} activeClass={activeStyle} smooth={true} duration={500} offset={-100} className="cursor-pointer hover:text-slate-900 transition-colors">
                             Mission
                         </ScrollLink>
                     </li>
                     <li>
-                        <ScrollLink to="purpose" spy={true} activeClass={activeStyle} smooth={true} duration={500} offset={-60} className="cursor-pointer hover:text-slate-900 transition-colors">
+                        <ScrollLink to="purpose" onClick={() => handleNavClick('actions')} spy={true} activeClass={activeStyle} smooth={true} duration={500} offset={-60} className="cursor-pointer hover:text-slate-900 transition-colors">
                             Purpose
                         </ScrollLink>
                     </li>
