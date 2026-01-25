@@ -1,0 +1,119 @@
+{
+  "nav": {
+    "brand": "China Action",
+    "actions": "Actions",
+    "mission": "Mission",
+    "purpose": "Purpose",
+    "join": "Join Us",
+    "donate": "Donate",
+    "back": "Back",
+    "back_map": "Back to Map"
+  },
+  "hero": {
+    "subtitle": "Global Projection Initiative",
+    "title_line1": "Global",
+    "title_line2": "Projections",
+    "quote_title": "Visualizing a Democratic China",
+    "quote_desc": "We project symbols of resistance onto global diplomatic landmarks, challenging totalitarian narratives through light and public space.",
+    "locations": {
+      "ny": {
+        "name": "New York",
+        "desc": "On International Human Rights Day 2025, we conducted a powerful visual intervention, projecting tributes to Liu Xiaobo and prisoners of conscience."
+      },
+      "berlin": {
+        "name": "Berlin",
+        "desc": "On New Year's Day 2026, we launched a strategic projection in Berlin to mark the start of a new year of resistance."
+      }
+    },
+    "target_label": "Target",
+    "view_details": "View Details"
+  },
+  "mission": {
+    "title_line1": "The Light",
+    "title_line2": "Manifesto",
+    "pillars": {
+      "1": {
+        "title": "Visual Resistance",
+        "desc": "Reclaiming public space through high-lumen imagery on diplomatic landmarks."
+      },
+      "2": {
+        "title": "Global Solidarity",
+        "desc": "A synchronized web of visual protest across continents and timezones."
+      },
+      "3": {
+        "title": "Secure Action",
+        "desc": "Encrypted technical support for those standing in the shadows."
+      }
+    },
+    "stats": {
+      "cities": "Cities Reached",
+      "projections": "Projections",
+      "kits": "Kits Sent",
+      "activists": "Activists"
+    }
+  },
+  "purpose": {
+    "subtitle": "Our Strategic Roadmap",
+    "title_line1": "The Path to",
+    "title_line2": "Liberation.",
+    "phases": {
+      "1": {
+        "meta": "2026 / Phase I: Global Visibility",
+        "title": "100 Coordinates",
+        "desc": "Establish a presence at 100 strategic landmarks worldwide. Each projection serves as a visual beacon, breaking the silence and connecting the global resistance."
+      },
+      "2": {
+        "meta": "2028 / Phase II: Infrastructure",
+        "title": "Decentralized Network",
+        "desc": "Deploy 1,000+ encrypted projection kits to activists globally. Transition from centralized actions to a self-sustaining, untraceable movement of light."
+      },
+      "3": {
+        "meta": "Beyond / Phase III: Transformation",
+        "title": "Democratic China",
+        "desc": "The dismantling of totalitarian structures. We visualize freedom until our light becomes the reality of a constitutional, democratic China."
+      }
+    },
+    "footer_quote": "History is written by those who act."
+  },
+  "donate": {
+    "subtitle": "Support the Movement",
+    "title_line1": "Fuel the",
+    "title_line2": "Light.",
+    "desc": "Your contribution directly funds high-lumen projection equipment, secure communication tools for activists on the ground, and global awareness campaigns.",
+    "trust": {
+      "transparency_title": "100% Transparency",
+      "transparency_desc": "Every cent is audited and used for project logistics.",
+      "impact_title": "Direct Impact",
+      "impact_desc": "Enable rapid response projections in key global cities."
+    },
+    "frequency": {
+      "once": "Give Once",
+      "monthly": "Monthly"
+    },
+    "custom_placeholder": "Custom Amount",
+    "payment_method": "Select Payment Method",
+    "submit": "Donate Now",
+    "disclaimer": "By donating, you agree to our Terms of Service and Privacy Policy."
+  },
+  "join": {
+    "subtitle": "Be the Light",
+    "title": "Join the Action",
+    "desc": "Apply for a mobile projection kit. We ship globally to those brave enough to challenge the narrative.",
+    "form": {
+      "email": "Email Address",
+      "password": "Create Password",
+      "shipping_label": "Shipping Destination",
+      "shipping_placeholder": "Full Shipping Address (City, Country, Zip Code...)",
+      "plan_label": "Your Plan",
+      "plan_placeholder": "Tell us where you plan to project and why you want to join...",
+      "submit": "Request Projection Kit"
+    },
+    "security_note": "Your data is encrypted. We prioritize the safety of our global activists."
+  },
+  "news": {
+    "media_label": "Media",
+    "cta_title": "Be Part of the Action",
+    "cta_desc": "Our movement grows through global solidarity. Join us in demanding justice for those silenced.",
+    "select_prompt": "Select a news article to read."
+  }
+}

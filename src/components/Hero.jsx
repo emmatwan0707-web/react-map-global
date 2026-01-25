@@ -3,33 +3,51 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
 import { X, Zap, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next'; // 1. 引入 i18n
+
+// 图片引入保持不变
 import Pic from '../assets/picture.jpg';
 import pictureBerlin from '../assets/pictureBerlin.png';
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
-const regions = [
+// 2. 将不随语言改变的“静态数据”（坐标、ID、图片）移到外面
+const staticRegionData = [
     {
         id: 'new-york',
-        name: 'New York',
+        jsonKey: 'ny', // 对应 json 里的 hero.locations.ny
         coordinates: [-74.006, 40.7128],
-        location: 'Chinese Consulate',
         image: Pic,
-        desc: 'On International Human Rights Day 2025, we conducted a powerful visual intervention, projecting tributes to Liu Xiaobo and prisoners of conscience.'
+        locationEn: 'Chinese Consulate',
+        locationZh: '中国领事馆'
     },
     {
         id: 'berlin',
-        name: 'Berlin',
+        jsonKey: 'berlin', // 对应 json 里的 hero.locations.berlin
         coordinates: [13.405, 52.52],
-        location: 'Chinese Embassy',
         image: pictureBerlin,
-        desc: "On New Year's Day 2026, we launched a strategic projection in Berlin to mark the start of a new year of resistance."
+        locationEn: 'Chinese Embassy',
+        locationZh: '中国大使馆'
     }
 ];
 
 const Hero = () => {
+    const { t, i18n } = useTranslation(); // 3. 初始化 hook
+    const isZh = i18n.language === 'zh'; // 判断中文环境
+
     const [selectedRegion, setSelectedRegion] = useState(null);
     const themeColor = "#D2DEEB";
+
+    // 4. 在组件内部动态生成 regions 数组，以便获取实时翻译
+    const regions = staticRegionData.map(data => ({
+        ...data,
+        // 从字典获取名字 (New York / 纽约)
+        name: t(`hero.locations.${data.jsonKey}.name`),
+        // 从字典获取描述
+        desc: t(`hero.locations.${data.jsonKey}.desc`),
+        // 处理具体的地点名称 (领事馆/大使馆)
+        location: isZh ? data.locationZh : data.locationEn
+    }));
 
     return (
         <section id="hero" className="relative w-full h-screen bg-white overflow-hidden flex flex-col">
@@ -43,21 +61,25 @@ const Hero = () => {
                 >
                     <div className="flex items-center gap-2 mb-4">
                         <Zap size={14} className="text-[#8BA4C1]" fill="currentColor" />
-                        <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-slate-400">
-                            Global Projection Initiative
+                        {/* Subtitle: 中文时加大字间距 */}
+                        <span className={`text-[9px] font-bold uppercase text-slate-400 ${isZh ? 'tracking-widest' : 'tracking-[0.4em]'}`}>
+                            {t('hero.subtitle')}
                         </span>
                     </div>
 
-                    <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-normal leading-[0.9] mb-8">
-                        Global <br /> Projections
+                    {/* Title: 中文时稍微增加行高，英文保持紧凑 */}
+                    <h1 className={`text-5xl md:text-6xl font-black text-slate-900 mb-8 ${isZh ? 'tracking-wide leading-tight' : 'tracking-normal leading-[0.9]'}`}>
+                        {t('hero.title_line1')} <br /> {t('hero.title_line2')}
                     </h1>
 
                     <div className="border-l-[3px] border-[#D2DEEB] pl-6 max-w-sm">
-                        <h2 className="text-base font-bold text-slate-800 mb-3 italic">
-                            "Visualizing a Democratic China"
+                        {/* Quote Title: 中文去掉斜体 (italic) */}
+                        <h2 className={`text-base font-bold text-slate-800 mb-3 ${isZh ? 'not-italic tracking-wide' : 'italic'}`}>
+                            {t('hero.quote_title')}
                         </h2>
-                        <p className="text-slate-500 text-xs leading-relaxed font-medium">
-                            We project symbols of resistance onto global diplomatic landmarks, challenging totalitarian narratives through light and public space.
+                        {/* Quote Desc: 中文使用两端对齐 (text-justify) */}
+                        <p className={`text-slate-500 text-xs font-medium ${isZh ? 'leading-loose text-justify' : 'leading-relaxed'}`}>
+                            {t('hero.quote_desc')}
                         </p>
                     </div>
                 </motion.div>
@@ -89,7 +111,7 @@ const Hero = () => {
                             {/* 将鼠标悬停状态保持在 g 上，但点击逻辑下放 */}
                             <g className="group pointer-events-auto cursor-pointer">
 
-                                {/* 装饰性光环：彻底禁用点击响应，仅做视觉展示 */}
+                                {/* 装饰性光环 */}
                                 <circle
                                     r={25}
                                     fill={themeColor}
@@ -101,7 +123,7 @@ const Hero = () => {
                                     className="animate-ping opacity-40 [animation-duration:1.5s] pointer-events-none"
                                 />
 
-                                {/* 实际点击区域（Hitbox）：半径设为 12，既容易点击又不会太靠外 */}
+                                {/* 实际点击区域 */}
                                 <circle
                                     r={12}
                                     fill="transparent"
@@ -118,11 +140,11 @@ const Hero = () => {
                                     className="group-hover:fill-blue-700 transition-colors shadow-lg pointer-events-none"
                                 />
 
-                                {/* 地名标签 */}
+                                {/* 地名标签：中文名字需要稍微调整位置或字体 */}
                                 <text
                                     textAnchor="middle"
                                     y={-28}
-                                    className="text-[10px] font-black fill-slate-800 opacity-0 group-hover:opacity-100 transition-all duration-300 uppercase tracking-widest italic pointer-events-none"
+                                    className={`text-[10px] font-black fill-slate-800 opacity-0 group-hover:opacity-100 transition-all duration-300 uppercase pointer-events-none ${isZh ? 'tracking-widest' : 'tracking-widest italic'}`}
                                 >
                                     {region.name}
                                 </text>
@@ -158,7 +180,10 @@ const Hero = () => {
                                 <X size={20} />
                             </button>
 
-                            <h2 className="text-2xl font-black text-slate-900 mb-6 uppercase italic">{selectedRegion.name}</h2>
+                            {/* Popup Title: New York / 纽约 */}
+                            <h2 className={`text-2xl font-black text-slate-900 mb-6 uppercase ${isZh ? 'not-italic' : 'italic'}`}>
+                                {selectedRegion.name}
+                            </h2>
 
                             <div className="mx-[-2.5rem] mb-6 overflow-hidden border-y border-white/30">
                                 <img
@@ -168,21 +193,24 @@ const Hero = () => {
                                 />
                             </div>
 
-                            <p className="text-[12px] text-slate-700 leading-relaxed font-semibold mb-6 px-2">
+                            {/* Popup Desc: 动态翻译的内容 */}
+                            <p className={`text-[12px] text-slate-700 font-semibold mb-6 px-2 ${isZh ? 'leading-loose text-justify' : 'leading-relaxed'}`}>
                                 {selectedRegion.desc}
                             </p>
 
                             <div className="space-y-4">
-                                <div className="bg-white/40 py-2 px-4 rounded-xl text-[10px] font-bold text-slate-600 uppercase tracking-widest text-center">
-                                    Target: {selectedRegion.location}
+                                <div className={`bg-white/40 py-2 px-4 rounded-xl text-[10px] font-bold text-slate-600 uppercase text-center ${isZh ? 'tracking-wider' : 'tracking-widest'}`}>
+                                    {/* 翻译 "Target" */}
+                                    {t('hero.target_label')}: {selectedRegion.location}
                                 </div>
 
                                 <Link
                                     to="/news"
                                     state={{ regionId: selectedRegion.id }}
-                                    className="flex items-center justify-center gap-2 w-full py-2.5 bg-slate-900 text-white rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-slate-800 transition-all shadow-lg group"
+                                    className={`flex items-center justify-center gap-2 w-full py-2.5 bg-slate-900 text-white rounded-full font-bold uppercase text-[10px] hover:bg-slate-800 transition-all shadow-lg group ${isZh ? 'tracking-wider' : 'tracking-widest'}`}
                                 >
-                                    View Details
+                                    {/* 翻译 "View Details" */}
+                                    {t('hero.view_details')}
                                     <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                                 </Link>
                             </div>

@@ -1,0 +1,119 @@
+{
+  "nav": {
+    "brand": "中国行动",
+    "actions": "行动",
+    "mission": "使命",
+    "purpose": "宗旨",
+    "join": "加入我们",
+    "donate": "捐赠",
+    "back": "返回",
+    "back_map": "返回地图"
+  },
+  "hero": {
+    "subtitle": "全球投影抗争计划",
+    "title_line1": "全球",
+    "title_line2": "投影行动",
+    "quote_title": "“看见民主中国”",
+    "quote_desc": "我们将抗争的符号投射在全球外交地标之上，用光影在公共空间挑战极权叙事。",
+    "locations": {
+      "ny": {
+        "name": "纽约",
+        "desc": "2025年国际人权日，我们实施了一次强有力的视觉干预，投射了纪念刘晓波及良心犯的影像。"
+      },
+      "berlin": {
+        "name": "柏林",
+        "desc": "2026年元旦，我们在柏林发起战略投影，标志着新一年抗争的开始。"
+      }
+    },
+    "target_label": "目标地点",
+    "view_details": "查看详情"
+  },
+  "mission": {
+    "title_line1": "光明",
+    "title_line2": "宣言",
+    "pillars": {
+      "1": {
+        "title": "视觉抗争",
+        "desc": "通过外交地标上的高流明影像，重夺公共话语空间。"
+      },
+      "2": {
+        "title": "全球联结",
+        "desc": "跨越洲际与时区，编织一张同步响应的视觉抗议网络。"
+      },
+      "3": {
+        "title": "安全行动",
+        "desc": "为身处暗处的勇者提供全加密的技术支持与保障。"
+      }
+    },
+    "stats": {
+      "cities": "覆盖城市",
+      "projections": "投影次数",
+      "kits": "设备发出",
+      "activists": "行动者"
+    }
+  },
+  "purpose": {
+    "subtitle": "战略路线图",
+    "title_line1": "通往",
+    "title_line2": "自由之路。",
+    "phases": {
+      "1": {
+        "meta": "2026 / 第一阶段：全球可见",
+        "title": "百处坐标",
+        "desc": "在全球100个战略地标建立存在。每一次投影都是一座视觉灯塔，打破沉默，联结全球抵抗力量。"
+      },
+      "2": {
+        "meta": "2028 / 第二阶段：基础设施",
+        "title": "去中心化网络",
+        "desc": "向全球行动者部署1000+套加密投影设备。从中心化行动向自给自足、难以追踪的光影运动转型。"
+      },
+      "3": {
+        "meta": "未来 / 第三阶段：质变",
+        "title": "民主中国",
+        "desc": "极权结构的瓦解。我们将持续可视化自由的愿景，直到光影成为宪政民主中国的现实。"
+      }
+    },
+    "footer_quote": "历史由行动者书写。"
+  },
+  "donate": {
+    "subtitle": "支持运动",
+    "title_line1": "点燃",
+    "title_line2": "星火。",
+    "desc": "您的捐助将直接资助高流明投影设备、一线行动者的加密通讯工具以及全球意识唤醒活动。",
+    "trust": {
+      "transparency_title": "100% 透明公开",
+      "transparency_desc": "每一分钱都经过审计并专门用于项目物流与执行。",
+      "impact_title": "直接效力",
+      "impact_desc": "支持全球关键城市的快速反应投影行动。"
+    },
+    "frequency": {
+      "once": "单次捐赠",
+      "monthly": "每月捐赠"
+    },
+    "custom_placeholder": "自定义金额",
+    "payment_method": "选择支付方式",
+    "submit": "立即捐赠",
+    "disclaimer": "捐赠即表示您同意我们的服务条款和隐私政策。"
+  },
+  "join": {
+    "subtitle": "成为光",
+    "title": "加入行动",
+    "desc": "申请便携式投影套件。我们向全球那些敢于挑战极权叙事的勇者发货。",
+    "form": {
+      "email": "电子邮箱",
+      "password": "创建密码",
+      "shipping_label": "收货目的地",
+      "shipping_placeholder": "完整收货地址 (城市, 国家, 邮编...)",
+      "plan_label": "您的计划",
+      "plan_placeholder": "告诉我们您计划在哪里进行投影，以及为什么加入...",
+      "submit": "申请投影套件"
+    },
+    "security_note": "您的数据已加密。我们优先保障全球行动者的安全。"
+  },
+  "news": {
+    "media_label": "媒体报道",
+    "cta_title": "参与行动",
+    "cta_desc": "我们的运动因全球团结而壮大。加入我们，为被禁言者伸张正义。",
+    "select_prompt": "选择一篇新闻阅读。"
+  }
+}
