@@ -3,19 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
 import { X, Zap, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next'; // 1. 引入 i18n
+import { useTranslation } from 'react-i18next';
 
-// 图片引入保持不变
 import Pic from '../assets/picture.jpg';
 import pictureBerlin from '../assets/pictureBerlin.png';
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
-// 2. 将不随语言改变的“静态数据”（坐标、ID、图片）移到外面
 const staticRegionData = [
     {
         id: 'new-york',
-        jsonKey: 'ny', // 对应 json 里的 hero.locations.ny
+        jsonKey: 'ny',
         coordinates: [-74.006, 40.7128],
         image: Pic,
         locationEn: 'Chinese Consulate',
@@ -23,7 +21,7 @@ const staticRegionData = [
     },
     {
         id: 'berlin',
-        jsonKey: 'berlin', // 对应 json 里的 hero.locations.berlin
+        jsonKey: 'berlin',
         coordinates: [13.405, 52.52],
         image: pictureBerlin,
         locationEn: 'Chinese Embassy',
@@ -31,61 +29,60 @@ const staticRegionData = [
     }
 ];
 
-const Hero = () => {
-    const { t, i18n } = useTranslation(); // 3. 初始化 hook
-    const isZh = i18n.language === 'zh'; // 判断中文环境
-
+const ActionsMap = () => {
+    const { t, i18n } = useTranslation();
+    const isZh = i18n.language === 'zh';
     const [selectedRegion, setSelectedRegion] = useState(null);
     const themeColor = "#D2DEEB";
 
-    // 4. 在组件内部动态生成 regions 数组，以便获取实时翻译
     const regions = staticRegionData.map(data => ({
         ...data,
-        // 从字典获取名字 (New York / 纽约)
         name: t(`hero.locations.${data.jsonKey}.name`),
-        // 从字典获取描述
         desc: t(`hero.locations.${data.jsonKey}.desc`),
-        // 处理具体的地点名称 (领事馆/大使馆)
         location: isZh ? data.locationZh : data.locationEn
     }));
 
     return (
-        <section id="hero" className="relative w-full h-screen bg-white overflow-hidden flex flex-col">
-            {/* 1. 文字区域 */}
+        <section id="actions" className="relative w-full h-screen bg-slate-50 overflow-hidden flex flex-col">
+
+            {/* --- 1. 左侧文字区域 (文案已修改为 Action 主题) --- */}
             <div className="relative z-20 pt-32 pl-10 md:pl-20 w-full md:w-5/12 pointer-events-none">
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
+                    whileInView={{ opacity: 1, x: 0 }} // 改为 whileInView 让滚动到这里时再触发动画
+                    viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                     className="pointer-events-auto"
                 >
+                    {/* Subtitle: 强调“影响力”与“动员” */}
                     <div className="flex items-center gap-2 mb-4">
                         <Zap size={14} className="text-[#8BA4C1]" fill="currentColor" />
-                        {/* Subtitle: 中文时加大字间距 */}
-                        <span className={`text-[9px] font-bold uppercase text-slate-400 ${isZh ? 'tracking-widest' : 'tracking-[0.4em]'}`}>
-                            {t('hero.subtitle')}
+                        <span className={`text-[10px] font-bold uppercase text-slate-400 ${isZh ? 'tracking-widest' : 'tracking-[0.4em]'}`}>
+                            {t('actions.subtitle', 'Impact & Mobilization')}
                         </span>
                     </div>
 
-                    {/* Title: 中文时稍微增加行高，英文保持紧凑 */}
+                    {/* Title: Direct Actions (直接行动) */}
                     <h1 className={`text-5xl md:text-6xl font-black text-slate-900 mb-8 ${isZh ? 'tracking-wide leading-tight' : 'tracking-normal leading-[0.9]'}`}>
-                        {t('hero.title_line1')} <br /> {t('hero.title_line2')}
+                        {t('actions.title_line1', 'Direct')} <br />
+                        <span className="text-transparent bg-clip-text bg-slate-900 ">
+                            {t('actions.title_line2', 'Actions')}
+                        </span>
                     </h1>
 
+                    {/* Description: 描述具体的抗议和活动 */}
                     <div className="border-l-[3px] border-[#D2DEEB] pl-6 max-w-sm">
-                        {/* Quote Title: 中文去掉斜体 (italic) */}
                         <h2 className={`text-base font-bold text-slate-800 mb-3 ${isZh ? 'not-italic tracking-wide' : 'italic'}`}>
-                            {t('hero.quote_title')}
+                            {t('actions.quote_title', 'Turning Dissent into Deed')}
                         </h2>
-                        {/* Quote Desc: 中文使用两端对齐 (text-justify) */}
                         <p className={`text-slate-500 text-xs font-medium ${isZh ? 'leading-loose text-justify' : 'leading-relaxed'}`}>
-                            {t('hero.quote_desc')}
+                            {t('actions.quote_desc', 'We are not just online; we are on the streets. Explore our network of protests, rallies, and projection events. Every marker represents a community standing up for freedom.')}
                         </p>
                     </div>
                 </motion.div>
             </div>
 
-            {/* 2. 地图区域 */}
+            {/* --- 2. 地图区域 (保持不变，功能完美) --- */}
             <div className="absolute -bottom-[3%] -right-20 w-[85%] h-[85%] z-10 opacity-95 pointer-events-none">
                 <ComposableMap
                     projectionConfig={{ rotate: [-10, 0, 0], center: [15, -10], scale: 210 }}
@@ -97,10 +94,14 @@ const Hero = () => {
                                 <Geography
                                     key={geo.rsmKey}
                                     geography={geo}
-                                    fill="#DDE7F0"
-                                    stroke="#BCCCDD"
+                                    fill="#E2E8F0" //稍微调深一点点背景色，更有质感
+                                    stroke="#CBD5E1"
                                     strokeWidth={0.8}
-                                    style={{ default: { outline: "none" } }}
+                                    style={{
+                                        default: { outline: "none" },
+                                        hover: { fill: "#CBD5E1", transition: "all 0.3s" },
+                                        pressed: { outline: "none" }
+                                    }}
                                 />
                             ))
                         }
@@ -108,10 +109,7 @@ const Hero = () => {
 
                     {regions.map((region) => (
                         <Marker key={region.id} coordinates={region.coordinates}>
-                            {/* 将鼠标悬停状态保持在 g 上，但点击逻辑下放 */}
                             <g className="group pointer-events-auto cursor-pointer">
-
-                                {/* 装饰性光环 */}
                                 <circle
                                     r={25}
                                     fill={themeColor}
@@ -122,8 +120,6 @@ const Hero = () => {
                                     fill={themeColor}
                                     className="animate-ping opacity-40 [animation-duration:1.5s] pointer-events-none"
                                 />
-
-                                {/* 实际点击区域 */}
                                 <circle
                                     r={12}
                                     fill="transparent"
@@ -132,15 +128,11 @@ const Hero = () => {
                                         setSelectedRegion(region);
                                     }}
                                 />
-
-                                {/* 视觉圆心 */}
                                 <circle
                                     r={6}
                                     fill="#2D3748"
                                     className="group-hover:fill-blue-700 transition-colors shadow-lg pointer-events-none"
                                 />
-
-                                {/* 地名标签：中文名字需要稍微调整位置或字体 */}
                                 <text
                                     textAnchor="middle"
                                     y={-28}
@@ -154,7 +146,7 @@ const Hero = () => {
                 </ComposableMap>
             </div>
 
-            {/* 3. 弹出详情框 */}
+            {/* --- 3. 弹出框 (保持不变) --- */}
             <AnimatePresence>
                 {selectedRegion && (
                     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -180,7 +172,6 @@ const Hero = () => {
                                 <X size={20} />
                             </button>
 
-                            {/* Popup Title: New York / 纽约 */}
                             <h2 className={`text-2xl font-black text-slate-900 mb-6 uppercase ${isZh ? 'not-italic' : 'italic'}`}>
                                 {selectedRegion.name}
                             </h2>
@@ -193,14 +184,12 @@ const Hero = () => {
                                 />
                             </div>
 
-                            {/* Popup Desc: 动态翻译的内容 */}
                             <p className={`text-[12px] text-slate-700 font-semibold mb-6 px-2 ${isZh ? 'leading-loose text-justify' : 'leading-relaxed'}`}>
                                 {selectedRegion.desc}
                             </p>
 
                             <div className="space-y-4">
                                 <div className={`bg-white/40 py-2 px-4 rounded-xl text-[10px] font-bold text-slate-600 uppercase text-center ${isZh ? 'tracking-wider' : 'tracking-widest'}`}>
-                                    {/* 翻译 "Target" */}
                                     {t('hero.target_label')}: {selectedRegion.location}
                                 </div>
 
@@ -209,7 +198,6 @@ const Hero = () => {
                                     state={{ regionId: selectedRegion.id }}
                                     className={`flex items-center justify-center gap-2 w-full py-2.5 bg-slate-900 text-white rounded-full font-bold uppercase text-[10px] hover:bg-slate-800 transition-all shadow-lg group ${isZh ? 'tracking-wider' : 'tracking-widest'}`}
                                 >
-                                    {/* 翻译 "View Details" */}
                                     {t('hero.view_details')}
                                     <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                                 </Link>
@@ -222,4 +210,4 @@ const Hero = () => {
     );
 };
 
-export default Hero;
+export default ActionsMap;

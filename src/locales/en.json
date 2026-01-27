@@ -26,7 +26,16 @@
       }
     },
     "target_label": "Target",
-    "view_details": "View Details"
+    "view_details": "View Details",
+    "join_us": "Join Movement",
+    "watch_film": "Watch Film"
+  },
+  "actions": {
+    "subtitle": "Impact & Mobilization",
+    "title_line1": "Direct",
+    "title_line2": "Actions",
+    "quote_title": "Turning Dissent into Deed",
+    "quote_desc": "We are not just online; we are on the streets. Explore our network of protests, rallies, and projection events. Every marker represents a community standing up for freedom."
   },
   "mission": {
     "title_line1": "The Light",

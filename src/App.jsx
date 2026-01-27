@@ -1,12 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Hero from './components/Hero';
+import Hero from './components/ActionsMap.jsx';
 import NewsPage from './components/NewsPage';
 import DonatePage from './components/Donate.jsx';
 import JoinPage from './components/JoinPage.jsx';
 import Mission from './components/Mission.jsx';
 import Purpose from './components/Purpose.jsx';
+import Herosection from "./components/Herosection.jsx";
+import ActionsMap from "./components/ActionsMap.jsx";
 
 const App = () => {
     return (
@@ -17,8 +19,9 @@ const App = () => {
 
                     <Route path="/" element={
                         <>
+                            <Herosection />
                             <section id="actions">
-                                <Hero />
+                                <ActionsMap />
                             </section>
                             <Mission />
                             <section id="purpose">

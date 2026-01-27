@@ -26,7 +26,16 @@
       }
     },
     "target_label": "目标地点",
-    "view_details": "查看详情"
+    "view_details": "查看详情",
+    "join_us": "加入运动",
+    "watch_film": "观看影片"
+  },
+  "actions": {
+    "subtitle": "影响与动员",
+    "title_line1": "直接",
+    "title_line2": "行动",
+    "quote_title": "将异议转化为行动",
+    "quote_desc": "我们不只在网络上，我们在街头。探索我们的抗议、集会和投影活动网络。每一个标记都代表着一个为自由挺身而出的社区。"
   },
   "mission": {
     "title_line1": "光明",
