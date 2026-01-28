@@ -21,16 +21,16 @@ const HeroSection = () => {
             theta: 0.2,
             dark: 0,
             diffuse: 1.2,
-            mapSamples: 25000,
-            mapBrightness: 6,
+            mapSamples: 100000,
+            mapBrightness: 12,
             baseColor: [1, 1, 1],
             markerColor: [0.1, 0.1, 0.1],
-            glowColor: [0.8, 0.8, 0.8],
+            glowColor: [0.95, 0.95, 0.95],
             opacity: 1,
             markers: [],
             onRender: (state) => {
                 state.phi = phi;
-                phi += 0.002;
+                phi += 0.005;
             },
         });
 
@@ -59,14 +59,14 @@ const HeroSection = () => {
                     className="text-center max-w-5xl mx-auto"
                 >
 
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-slate-900 mb-8 mt-10 leading-tight tracking-tighter">
+                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-slate-900 mb-8 mt-14 leading-tight tracking-tighter">
                         {t('hero.title_line1', 'Global')}
                         <span className="block text-transparent pb-2 bg-clip-text bg-gradient-to-b from-slate-900 to-slate-500">
                             {t('hero.title_line2', 'Projections')}
                         </span>
                     </h1>
 
-                    <p className={`text-slate-600 text-sm md:text-sm font-medium max-w-2xl mt-4 mx-auto ${isZh ? 'leading-loose' : 'leading-relaxed'}`}>
+                    <p className={`text-slate-600 text-sm md:text-sm font-medium max-w-2xl mt-10 mx-auto ${isZh ? 'leading-loose' : 'leading-relaxed'}`}>
                         {t('hero.quote_desc', 'Visualizing a Democratic China. We project symbols of resistance onto global diplomatic landmarks.')}
                     </p>
 
